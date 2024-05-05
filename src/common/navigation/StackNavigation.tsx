@@ -3,10 +3,10 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {createStackNavigator} from '@react-navigation/stack';
-import HomeScreen from '../../container/screens/HomeScreen';
-import ChatScreen from '../../container/screens/ChatScreen';
-import LikesScreen from '../../container/screens/LikesScreen';
-import ProfileScreen from '../../container/screens/ProfileScreen';
+import HomeScreen from '../../container/Home/HomeScreen';
+import ChatScreen from '../../container/Home/ChatScreen';
+import LikesScreen from '../../container/Home/LikesScreen';
+import ProfileScreen from '../../container/Home/ProfileScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {NavigationContainer} from '@react-navigation/native';
 import {NavScreenTags} from '../constants/navScreenTags';
@@ -16,19 +16,22 @@ const Stack = createStackNavigator();
 
 const BottomTabs = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={() => ({
+        tabBarShowLabel: false,
+      })}>
       <Tab.Screen
         name={NavScreenTags.HOME_TAB}
         component={HomeScreen}
         options={{
           // tabBarStyle: {backgroundColor: '#ccc'},
-          tabBarLabelStyle: {color: '#008397'},
+          // tabBarLabelStyle: {color: '#008397'},
           headerShown: false,
           tabBarIcon: ({focused}) =>
             focused ? (
-              <Ionicons name="home-sharp" size={24} color={'black'} />
+              <Ionicons name="home-sharp" size={30} color={'#1593a1'} />
             ) : (
-              <Ionicons name="home-outline" size={24} color={'black'} />
+              <Ionicons name="home-outline" size={30} color={'#1593a1'} />
             ),
         }}
       />
@@ -37,13 +40,13 @@ const BottomTabs = () => {
         component={ChatScreen}
         options={{
           // tabBarStyle: {backgroundColor: '#ccc'},
-          tabBarLabelStyle: {color: '#008397'},
+          // tabBarLabelStyle: {color: '#008397'},
           headerShown: false,
           tabBarIcon: ({focused}) =>
             focused ? (
-              <Ionicons name="chatbox-sharp" size={24} color={'black'} />
+              <Ionicons name="chatbox-sharp" size={30} color={'#1593a1'} />
             ) : (
-              <Ionicons name="chatbox-outline" size={24} color={'black'} />
+              <Ionicons name="chatbox-outline" size={30} color={'#1593a1'} />
             ),
         }}
       />
@@ -52,13 +55,13 @@ const BottomTabs = () => {
         component={LikesScreen}
         options={{
           // tabBarStyle: {backgroundColor: '#ccc'},
-          tabBarLabelStyle: {color: '#008397'},
+          // tabBarLabelStyle: {color: '#008397'},
           headerShown: false,
           tabBarIcon: ({focused}) =>
             focused ? (
-              <Ionicons name="heart-sharp" size={24} color={'black'} />
+              <Ionicons name="heart-sharp" size={30} color={'#1593a1'} />
             ) : (
-              <Ionicons name="heart-outline" size={24} color={'black'} />
+              <Ionicons name="heart-outline" size={30} color={'#1593a1'} />
             ),
         }}
       />
@@ -67,17 +70,29 @@ const BottomTabs = () => {
         component={ProfileScreen}
         options={{
           // tabBarStyle: {backgroundColor: '#ccc'},
-          tabBarLabelStyle: {color: '#008397'},
+          // tabBarLabelStyle: {color: '#008397'},
           headerShown: false,
           tabBarIcon: ({focused}) =>
             focused ? (
-              <Ionicons name="person-sharp" size={24} color={'black'} />
+              <Ionicons name="person-sharp" size={30} color={'#1593a1'} />
             ) : (
-              <Ionicons name="person-outline" size={24} color={'black'} />
+              <Ionicons name="person-outline" size={30} color={'#1593a1'} />
             ),
         }}
       />
     </Tab.Navigator>
+  );
+};
+
+const AuthStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name={NavScreenTags.BOTTOM_TAB_NAV}
+        component={BottomTabs}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
   );
 };
 
