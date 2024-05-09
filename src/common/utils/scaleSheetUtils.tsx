@@ -10,6 +10,8 @@ export const scaleSize = (size: number) => {
   return scaleWidth < 1 ? scaleWidth : Math.round(scaleWidth);
 };
 
+export const scaleSizeWidth = (size: number): number =>
+  Math.round((screenWidth / baseWidth) * size);
 export const scaleSizeHeight = (size: number): number =>
   Math.round((screenHeight / baseHeight) * size);
 

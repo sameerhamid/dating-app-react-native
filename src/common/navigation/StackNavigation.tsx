@@ -25,6 +25,7 @@ import PhotoScreen from '../../container/Auth/PhotoScreen';
 import PromptsScreen from '../../container/Auth/PromptsScreen';
 import ShowPromptsScreen from '../../container/Auth/ShowPromptsScreen';
 import PrefinalScreen from '../../container/Auth/PreFinalScreen';
+import {navigationRef} from '../utils/navigatorUtils';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -197,10 +198,10 @@ const MainStack = () => {
 };
 const StackNavigation = () => {
   return (
-    <NavigationContainer>
-      <MainStack />
+    <NavigationContainer ref={navigationRef}>
+      {/* <MainStack /> */}
 
-      {/* <AuthStack /> */}
+      <AuthStack />
     </NavigationContainer>
   );
 };
