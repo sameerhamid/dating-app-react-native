@@ -198,9 +198,9 @@ const MainStack = () => {
 const StackNavigation = () => {
   return (
     <NavigationContainer>
-      {/* <MainStack /> */}
+      <MainStack />
 
-      <AuthStack />
+      {/* <AuthStack /> */}
     </NavigationContainer>
   );
 };
