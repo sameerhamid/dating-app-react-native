@@ -1,16 +1,35 @@
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React, {useState} from 'react';
 import CustomText from '../../../common/components/customText';
 import {scaleFontSize, scaleSize} from '../../../common/utils/scaleSheetUtils';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import CustomHeader from '../../../common/components/customHeader';
+import {Images} from '../../../common/constants/images';
+import {goBack, navigate} from '../../../common/utils/navigatorUtils';
+import Colors from '../../../common/styles/colors';
+import {NavScreenTags} from '../../../common/constants/navScreenTags';
 const NameScreen = () => {
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
+      <CustomHeader
+        title="Name Screen"
+        leftAccessories={Images.BACK_ARROW}
+        leftAccessoriesPress={goBack}
+      />
       {/* heading  */}
+
       <View style={styles.headingContainer}>
         <CustomText
           text="NO BACKGROUND CHECKS ARE CONDUCTED"
-          txtSize={scaleFontSize(28)}
+          txtSize={scaleFontSize(22)}
         />
       </View>
 
@@ -31,6 +50,42 @@ const NameScreen = () => {
             <View style={styles.dots} />
           </View>
         </View>
+
+        <View style={styles.inputContainer}>
+          <CustomText text="What's your name?" txtSize={scaleFontSize(22)} />
+
+          <TextInput
+            placeholder="First name (required)"
+            placeholderTextColor={'#BEBEBE'}
+            style={styles.input}
+            value={firstName}
+            onChangeText={fName => setFirstName(fName)}
+          />
+
+          <TextInput
+            placeholder="Last name"
+            placeholderTextColor={'#BEBEBE'}
+            style={styles.input}
+            value={lastName}
+            onChangeText={fName => setLastName(fName)}
+          />
+          <CustomText
+            text="Last name is optional"
+            txtSize={scaleFontSize(12)}
+            txtStyle={{marginTop: scaleSize(6)}}
+          />
+        </View>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigate(NavScreenTags.EMAIL_SCREEN);
+          }}>
+          <MaterialCommunityIcons
+            name="arrow-right-circle"
+            size={scaleSize(34)}
+            color={Colors.purpleButtonTheme}
+          />
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -45,11 +100,11 @@ const styles = StyleSheet.create({
   },
   headingContainer: {
     marginTop: scaleSize(40),
-    alignItems: 'center',
+    marginHorizontal: scaleSize(20),
   },
   container: {
     marginTop: scaleSize(30),
-    marginHorizontal: scaleSize(30),
+    marginHorizontal: scaleSize(20),
   },
   iconsContainer: {
     flexDirection: 'row',
@@ -70,5 +125,21 @@ const styles = StyleSheet.create({
     padding: scaleSize(7),
     borderWidth: 1,
     borderRadius: scaleSize(30),
+  },
+  inputContainer: {
+    marginTop: scaleSize(20),
+  },
+  input: {
+    marginTop: scaleSize(20),
+
+    borderBottomWidth: scaleSize(1),
+    paddingHorizontal: scaleSize(6),
+    paddingVertical: scaleSize(12),
+    fontSize: scaleFontSize(18),
+  },
+
+  button: {
+    alignSelf: 'flex-end',
+    marginTop: scaleSize(22),
   },
 });
