@@ -17,3 +17,26 @@ export enum ImageSourceType {
   URL = 'Url',
   LOCAL = 'Local',
 }
+
+// gender enums
+
+export enum Gender {
+  MEM = 'Men',
+  WOMEN = 'Women',
+  NON_BINARY = 'Non-Binary',
+}
+
+// type screen enums
+export enum Type {
+  STRIAGHT = 'striaght',
+  GAY = 'gay',
+  LESIBIAN = 'lesibian',
+  BISEXUAL = 'bisexual',
+}
+
+// dating type
+export enum DatingType {
+  MEM = 'Men',
+  WOMEN = 'Women',
+  EVERYONE = 'Everyone',
+}
