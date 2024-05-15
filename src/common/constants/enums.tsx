@@ -40,3 +40,14 @@ export enum DatingType {
   WOMEN = 'Women',
   EVERYONE = 'Everyone',
 }
+
+// looking for type
+
+export enum LookingFor {
+  LIFEPARTNER = 'Lifepartner',
+  LONG_TERM_RELATIONSHIP = 'Long-term relationship',
+  LONG_TERM_RELATIONSHIP_OPEN_TO_SHORT = 'Long-term relationship open to short',
+  SHORT_TERM_RELATIONSHIP_OPEN_TO_LONG = 'Short-term relationship open to long',
+  SHORT_TERM_RELATIONSHIP = 'Short-term relationship',
+  FIGURING_OUT_MY_DATING_GOALS = 'Figuring out my dating goals',
+}
