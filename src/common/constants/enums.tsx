@@ -51,3 +51,10 @@ export enum LookingFor {
   SHORT_TERM_RELATIONSHIP = 'Short-term relationship',
   FIGURING_OUT_MY_DATING_GOALS = 'Figuring out my dating goals',
 }
+
+// show promts switch enums
+
+export enum ShowPromptsEnum {
+  ABOUT_ME = 'About me',
+  SELF_CARE = 'Self Care',
+}

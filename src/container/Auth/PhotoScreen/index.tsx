@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.grayBackground,
     paddingHorizontal: scaleSize(10),
-    paddingVertical: scaleSize(10),
+    paddingVertical: scaleSize(6),
     columnGap: scaleSize(6),
     borderRadius: scaleSize(10),
   },
