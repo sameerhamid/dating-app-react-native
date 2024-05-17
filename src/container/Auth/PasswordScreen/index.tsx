@@ -9,8 +9,16 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import CustomText from '../../../common/components/customText';
 import {NavScreenTags} from '../../../common/constants/navScreenTags';
 import Colors from '../../../common/styles/colors';
+import {saveRegistrationProgress} from '../../../common/utils/registrationUtils';
 const PasswordScreen = () => {
   const [password, setPassword] = useState<string>('');
+
+  const handleNext = (): void => {
+    if (password.trim() !== '') {
+      saveRegistrationProgress('Passoword', password);
+      navigate(NavScreenTags.BIRTH_SCREEN);
+    }
+  };
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <CustomHeader
@@ -56,11 +64,7 @@ const PasswordScreen = () => {
             txtSize={scaleFontSize(12)}
           />
         </View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigate(NavScreenTags.BIRTH_SCREEN);
-          }}>
+        <TouchableOpacity style={styles.button} onPress={handleNext}>
           <MaterialCommunityIcons
             name="arrow-right-circle"
             size={scaleSize(34)}

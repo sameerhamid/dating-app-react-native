@@ -22,8 +22,14 @@ import {screenWidth} from '../../../common/constants/dimensions';
 import CustomButtom from '../../../common/components/customButton';
 import usePhotoScreenController from './PhotoScreenController';
 const PhotoScreen = () => {
-  const {imageUrls, setImageUrls, handleAddImage, imageUrl, setImageUrl} =
-    usePhotoScreenController();
+  const {
+    imageUrls,
+    setImageUrls,
+    handleAddImage,
+    imageUrl,
+    setImageUrl,
+    handleNext,
+  } = usePhotoScreenController();
 
   const renderPhotoList = () => {
     return (
@@ -131,11 +137,7 @@ const PhotoScreen = () => {
           <CustomText text="Add Image" txtStyle={styles.addImageBtnTxt} />
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigate(NavScreenTags.PROMPTS_SCREEN);
-          }}>
+        <TouchableOpacity style={styles.button} onPress={handleNext}>
           <MaterialCommunityIcons
             name="arrow-right-circle"
             size={scaleSize(34)}

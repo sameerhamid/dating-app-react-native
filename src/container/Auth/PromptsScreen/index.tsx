@@ -17,9 +17,20 @@ import Colors from '../../../common/styles/colors';
 import {NavScreenTags} from '../../../common/constants/navScreenTags';
 import {ParamListBase, RouteProp, useRoute} from '@react-navigation/native';
 import {promptsType} from '../ShowPromptsScreen/promptsData';
+import {saveRegistrationProgress} from '../../../common/utils/registrationUtils';
 
 const PromptsScreen = () => {
   const route = useRoute();
+
+  const handleNext = (): void => {
+    //@ts-ignore
+    if (route.params?.prompts.length > 0) {
+      //@ts-ignore
+      saveRegistrationProgress('Prompts', route.params?.prompts.length);
+    }
+
+    navigate(NavScreenTags.PREFINAL_SCREEN);
+  };
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <CustomHeader
@@ -116,11 +127,7 @@ const PromptsScreen = () => {
           }
         </View>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigate(NavScreenTags.PREFINAL_SCREEN);
-          }}>
+        <TouchableOpacity style={styles.button} onPress={handleNext}>
           <MaterialCommunityIcons
             name="arrow-right-circle"
             size={scaleSize(34)}

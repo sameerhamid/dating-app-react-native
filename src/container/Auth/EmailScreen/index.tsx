@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import CustomHeader from '../../../common/components/customHeader';
 import {Images} from '../../../common/constants/images';
 import {goBack, navigate} from '../../../common/utils/navigatorUtils';
@@ -15,8 +15,25 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {NavScreenTags} from '../../../common/constants/navScreenTags';
 import CustomText from '../../../common/components/customText';
 import Colors from '../../../common/styles/colors';
+import {
+  getRegistrationProgress,
+  saveRegistrationProgress,
+} from '../../../common/utils/registrationUtils';
 const EmailScreen = () => {
   const [email, setEmail] = useState<string>('');
+
+  useEffect(() => {
+    getRegistrationProgress('Email').then(email => {
+      setEmail(email);
+    });
+  }, []);
+
+  const handleNext = (): void => {
+    if (email.trim() !== '') {
+      saveRegistrationProgress('Email', email);
+      navigate(NavScreenTags.PASSWORD_SCREEN);
+    }
+  };
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <CustomHeader
@@ -66,11 +83,7 @@ const EmailScreen = () => {
             txtSize={scaleFontSize(12)}
           />
         </View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigate(NavScreenTags.PASSWORD_SCREEN);
-          }}>
+        <TouchableOpacity style={styles.button} onPress={handleNext}>
           <MaterialCommunityIcons
             name="arrow-right-circle"
             size={scaleSize(34)}

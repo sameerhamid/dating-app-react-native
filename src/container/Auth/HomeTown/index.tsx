@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import CustomText from '../../../common/components/customText';
 import {scaleFontSize, scaleSize} from '../../../common/utils/scaleSheetUtils';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -16,9 +16,25 @@ import {goBack, navigate} from '../../../common/utils/navigatorUtils';
 import Colors from '../../../common/styles/colors';
 import {NavScreenTags} from '../../../common/constants/navScreenTags';
 import {DatingType, LookingFor} from '../../../common/constants/enums';
+import {
+  getRegistrationProgress,
+  saveRegistrationProgress,
+} from '../../../common/utils/registrationUtils';
 const HomeTownScreen = () => {
   const [home, setHOme] = useState<string>('');
 
+  const handleNext = (): void => {
+    if (home.trim() !== '') {
+      saveRegistrationProgress('HomeTown', home);
+      navigate(NavScreenTags.PHOTE_SCREEN);
+    }
+  };
+
+  useEffect(() => {
+    getRegistrationProgress('HomeTown').then(homeTown => {
+      setHOme(homeTown);
+    });
+  }, []);
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <CustomHeader
@@ -68,11 +84,7 @@ const HomeTownScreen = () => {
           />
           <CustomText text="Visible on profile" txtSize={scaleFontSize(18)} />
         </View> */}
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigate(NavScreenTags.PHOTE_SCREEN);
-          }}>
+        <TouchableOpacity style={styles.button} onPress={handleNext}>
           <MaterialCommunityIcons
             name="arrow-right-circle"
             size={scaleSize(34)}

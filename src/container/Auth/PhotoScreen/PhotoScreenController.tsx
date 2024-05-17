@@ -1,5 +1,11 @@
 import {View, Text} from 'react-native';
 import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import {navigate} from '../../../common/utils/navigatorUtils';
+import {NavScreenTags} from '../../../common/constants/navScreenTags';
+import {
+  getRegistrationProgress,
+  saveRegistrationProgress,
+} from '../../../common/utils/registrationUtils';
 
 interface usePhoteSceenControllerTypes {
   imageUrls: string[];
@@ -7,6 +13,7 @@ interface usePhoteSceenControllerTypes {
   imageUrl: string;
   setImageUrl: Dispatch<SetStateAction<string>>;
   handleAddImage: () => void;
+  handleNext: () => void;
 }
 const usePhotoScreenController = (): usePhoteSceenControllerTypes => {
   const [imageUrl, setImageUrl] = useState<string>('');
@@ -32,8 +39,6 @@ const usePhotoScreenController = (): usePhoteSceenControllerTypes => {
     //   break;
     // }
 
-    console.log(index);
-
     if (index !== -1) {
       let updatedUrls = [...imageUrls];
       if (imageUrl !== '') {
@@ -45,7 +50,31 @@ const usePhotoScreenController = (): usePhoteSceenControllerTypes => {
       }
     }
   };
-  return {imageUrls, setImageUrls, handleAddImage, imageUrl, setImageUrl};
+
+  const handleNext = (): void => {
+    if (imageUrls.length > 0) {
+      saveRegistrationProgress('Photos', imageUrls);
+    }
+    navigate(NavScreenTags.PROMPTS_SCREEN);
+  };
+
+  useEffect(() => {
+    getRegistrationProgress('Photos').then(photos => {
+      console.log(photos);
+
+      if (photos) {
+        setImageUrl(photos);
+      }
+    });
+  }, []);
+  return {
+    imageUrls,
+    setImageUrls,
+    handleAddImage,
+    imageUrl,
+    setImageUrl,
+    handleNext,
+  };
 };
 
 export default usePhotoScreenController;

@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import CustomText from '../../../common/components/customText';
 import {scaleFontSize, scaleSize} from '../../../common/utils/scaleSheetUtils';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -14,9 +14,31 @@ import {Images} from '../../../common/constants/images';
 import {goBack, navigate} from '../../../common/utils/navigatorUtils';
 import Colors from '../../../common/styles/colors';
 import {NavScreenTags} from '../../../common/constants/navScreenTags';
+import {
+  getRegistrationProgress,
+  saveRegistrationProgress,
+} from '../../../common/utils/registrationUtils';
 const NameScreen = () => {
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
+
+  useEffect(() => {
+    getRegistrationProgress('Name').then(progressData => {
+      if (progressData) {
+        console.log(JSON.stringify(progressData));
+
+        setFirstName(progressData || '');
+      }
+    });
+  }, []);
+
+  const handleNext = (): void => {
+    if (firstName.trim() !== '') {
+      saveRegistrationProgress('Name', firstName);
+
+      navigate(NavScreenTags.EMAIL_SCREEN);
+    }
+  };
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <CustomHeader
@@ -75,11 +97,7 @@ const NameScreen = () => {
             txtStyle={{marginTop: scaleSize(6)}}
           />
         </View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigate(NavScreenTags.EMAIL_SCREEN);
-          }}>
+        <TouchableOpacity style={styles.button} onPress={handleNext}>
           <MaterialCommunityIcons
             name="arrow-right-circle"
             size={scaleSize(34)}

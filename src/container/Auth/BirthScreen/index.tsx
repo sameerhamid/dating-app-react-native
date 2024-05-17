@@ -1,5 +1,5 @@
 import {StyleSheet, TextInput, TouchableOpacity, View} from 'react-native';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {scaleFontSize, scaleSize} from '../../../common/utils/scaleSheetUtils';
 import CustomHeader from '../../../common/components/customHeader';
 import {Images} from '../../../common/constants/images';
@@ -9,6 +9,10 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import CustomText from '../../../common/components/customText';
 import {NavScreenTags} from '../../../common/constants/navScreenTags';
 import Colors from '../../../common/styles/colors';
+import {
+  getRegistrationProgress,
+  saveRegistrationProgress,
+} from '../../../common/utils/registrationUtils';
 const BirthScreen = () => {
   const monthRef = useRef(null);
   const yearRef = useRef(null);
@@ -33,6 +37,28 @@ const BirthScreen = () => {
     }
   };
 
+  const handleNext = (): void => {
+    if (day.trim() !== '' && month.trim() !== '' && year.trim() !== '') {
+      const dateOfBirth = `${day}/${month}/${year}`;
+      saveRegistrationProgress('BirthDate', dateOfBirth);
+      navigate(NavScreenTags.LOCATION_SCREEN);
+    }
+  };
+
+  useEffect(() => {
+    getRegistrationProgress('BirthDate')
+      .then(birth => {
+        if (birth) {
+          const dataOfBirth = birth.split('/');
+          setDay(dataOfBirth[0]);
+          setMonth(dataOfBirth[1]);
+          setYear(dataOfBirth[2]);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <CustomHeader
@@ -100,11 +126,7 @@ const BirthScreen = () => {
             />
           </View>
         </View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigate(NavScreenTags.LOCATION_SCREEN);
-          }}>
+        <TouchableOpacity style={styles.button} onPress={handleNext}>
           <MaterialCommunityIcons
             name="arrow-right-circle"
             size={scaleSize(34)}

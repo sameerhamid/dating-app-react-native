@@ -15,8 +15,16 @@ import {goBack, navigate} from '../../../common/utils/navigatorUtils';
 import Colors from '../../../common/styles/colors';
 import {NavScreenTags} from '../../../common/constants/navScreenTags';
 import {Type} from '../../../common/constants/enums';
+import {saveRegistrationProgress} from '../../../common/utils/registrationUtils';
 const TypeScreen = () => {
-  const [type, setType] = useState('');
+  const [type, setType] = useState<string>('');
+
+  const handleNext = (): void => {
+    if (type.trim() !== '') {
+      saveRegistrationProgress('Type', type);
+      navigate(NavScreenTags.DATING_TYPE_SCREEN);
+    }
+  };
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <CustomHeader
@@ -125,11 +133,7 @@ const TypeScreen = () => {
           />
           <CustomText text="Visible on profile" txtSize={scaleFontSize(18)} />
         </View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigate(NavScreenTags.DATING_TYPE_SCREEN);
-          }}>
+        <TouchableOpacity style={styles.button} onPress={handleNext}>
           <MaterialCommunityIcons
             name="arrow-right-circle"
             size={scaleSize(34)}
