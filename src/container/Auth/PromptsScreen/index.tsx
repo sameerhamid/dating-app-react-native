@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import CustomText from '../../../common/components/customText';
 import {scaleFontSize, scaleSize} from '../../../common/utils/scaleSheetUtils';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -31,6 +31,8 @@ const PromptsScreen = () => {
 
     navigate(NavScreenTags.PREFINAL_SCREEN);
   };
+
+  useEffect(() => {}, []);
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <CustomHeader
