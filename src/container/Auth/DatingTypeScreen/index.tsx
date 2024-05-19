@@ -14,7 +14,7 @@ import {Images} from '../../../common/constants/images';
 import {goBack, navigate} from '../../../common/utils/navigatorUtils';
 import Colors from '../../../common/styles/colors';
 import {NavScreenTags} from '../../../common/constants/navScreenTags';
-import {DatingType} from '../../../common/constants/enums';
+import {AuthScreenEnums, DatingType} from '../../../common/constants/enums';
 import {
   getRegistrationProgress,
   saveRegistrationProgress,
@@ -33,16 +33,20 @@ const DatingTypeScreen = () => {
   };
 
   useEffect(() => {
-    getRegistrationProgress('DatingType').then(dating => {
-      if (dating) {
-        setDatingPrefrences(dating);
-      }
-    });
+    getRegistrationProgress(AuthScreenEnums.DATING)
+      .then(progressData => {
+        if (progressData.datingPreferences) {
+          setDatingPrefrences(progressData.datingPreferences);
+        }
+      })
+      .catch(err => {
+        console.log('Dating Screen>>>', err);
+      });
   }, []);
 
   const handleNext = (): void => {
     if (datingPreferences.length > 0) {
-      saveRegistrationProgress('DatingType', datingPreferences);
+      saveRegistrationProgress(AuthScreenEnums.DATING, {datingPreferences});
       navigate(NavScreenTags.LOOKIN_FOR_SCREEN);
     }
   };

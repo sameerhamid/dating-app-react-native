@@ -6,8 +6,10 @@ import CustomButtom from '../../../common/components/customButton';
 import {navigate} from '../../../common/utils/navigatorUtils';
 import {NavScreenTags} from '../../../common/constants/navScreenTags';
 import CustomText from '../../../common/components/customText';
+import usePrefinalScreenController from './PrefinalScreenController';
 
 const PreFinalScreen = () => {
+  const {userData, token, regisetrUser} = usePrefinalScreenController();
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <View style={styles.headingTxtContainer}>
@@ -29,10 +31,7 @@ const PreFinalScreen = () => {
       </View>
 
       <View style={styles.bottomBtn}>
-        <CustomButtom
-          title="Finish Registering"
-          onPress={() => navigate(NavScreenTags.NAME_SCREEN)}
-        />
+        <CustomButtom title="Finish Registering" onPress={regisetrUser} />
       </View>
     </SafeAreaView>
   );

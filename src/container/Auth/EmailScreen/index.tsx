@@ -19,18 +19,24 @@ import {
   getRegistrationProgress,
   saveRegistrationProgress,
 } from '../../../common/utils/registrationUtils';
+import {AuthScreenEnums} from '../../../common/constants/enums';
 const EmailScreen = () => {
   const [email, setEmail] = useState<string>('');
 
   useEffect(() => {
-    getRegistrationProgress('Email').then(email => {
-      setEmail(email);
-    });
+    getRegistrationProgress(AuthScreenEnums.EMAIL)
+      .then(progessData => {
+        setEmail(progessData.email);
+      })
+      .catch(err => {
+        console.log(`Email Screen >> ${err}`);
+      });
   }, []);
 
   const handleNext = (): void => {
     if (email.trim() !== '') {
-      saveRegistrationProgress('Email', email);
+      const newEmail = email.trim().toLocaleLowerCase();
+      saveRegistrationProgress(AuthScreenEnums.EMAIL, {email: newEmail});
       navigate(NavScreenTags.PASSWORD_SCREEN);
     }
   };
@@ -134,7 +140,7 @@ const styles = StyleSheet.create({
   },
   input: {
     marginTop: scaleSize(20),
-
+    color: 'black',
     borderBottomWidth: scaleSize(1),
     paddingHorizontal: scaleSize(6),
     paddingVertical: scaleSize(12),

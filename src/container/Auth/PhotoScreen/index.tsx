@@ -31,6 +31,8 @@ const PhotoScreen = () => {
     handleNext,
   } = usePhotoScreenController();
 
+  console.log('image', imageUrls);
+
   const renderPhotoList = () => {
     return (
       <View style={styles.pototsContainer}>
@@ -210,7 +212,7 @@ const styles = StyleSheet.create({
   },
   input: {
     // marginTop: scaleSize(20),
-
+    // color: 'black',
     // borderBottomWidth: scaleSize(1),
     // paddingHorizontal: scaleSize(6),
     // paddingVertical: scaleSize(12),
