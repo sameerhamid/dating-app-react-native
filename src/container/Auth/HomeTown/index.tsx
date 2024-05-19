@@ -15,7 +15,11 @@ import {Images} from '../../../common/constants/images';
 import {goBack, navigate} from '../../../common/utils/navigatorUtils';
 import Colors from '../../../common/styles/colors';
 import {NavScreenTags} from '../../../common/constants/navScreenTags';
-import {DatingType, LookingFor} from '../../../common/constants/enums';
+import {
+  AuthScreenEnums,
+  DatingType,
+  LookingFor,
+} from '../../../common/constants/enums';
 import {
   getRegistrationProgress,
   saveRegistrationProgress,
@@ -25,14 +29,14 @@ const HomeTownScreen = () => {
 
   const handleNext = (): void => {
     if (home.trim() !== '') {
-      saveRegistrationProgress('HomeTown', home);
+      saveRegistrationProgress(AuthScreenEnums.HOME_TOWN, {home});
       navigate(NavScreenTags.PHOTE_SCREEN);
     }
   };
 
   useEffect(() => {
-    getRegistrationProgress('HomeTown').then(homeTown => {
-      setHOme(homeTown);
+    getRegistrationProgress(AuthScreenEnums.HOME_TOWN).then(({home}) => {
+      setHOme(home);
     });
   }, []);
   return (
@@ -155,7 +159,7 @@ const styles = StyleSheet.create({
   },
   input: {
     marginTop: scaleSize(20),
-
+    color: 'black',
     borderBottomWidth: scaleSize(1),
     paddingHorizontal: scaleSize(6),
     paddingVertical: scaleSize(12),

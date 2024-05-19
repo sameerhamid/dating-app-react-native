@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import CustomText from '../../../common/components/customText';
 import {scaleFontSize, scaleSize} from '../../../common/utils/scaleSheetUtils';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -14,17 +14,31 @@ import {Images} from '../../../common/constants/images';
 import {goBack, navigate} from '../../../common/utils/navigatorUtils';
 import Colors from '../../../common/styles/colors';
 import {NavScreenTags} from '../../../common/constants/navScreenTags';
-import {Type} from '../../../common/constants/enums';
-import {saveRegistrationProgress} from '../../../common/utils/registrationUtils';
+import {AuthScreenEnums, Type} from '../../../common/constants/enums';
+import {
+  getRegistrationProgress,
+  saveRegistrationProgress,
+} from '../../../common/utils/registrationUtils';
 const TypeScreen = () => {
   const [type, setType] = useState<string>('');
 
   const handleNext = (): void => {
     if (type.trim() !== '') {
-      saveRegistrationProgress('Type', type);
+      saveRegistrationProgress(AuthScreenEnums.TYPE, {type});
       navigate(NavScreenTags.DATING_TYPE_SCREEN);
     }
   };
+
+  useEffect(() => {
+    getRegistrationProgress(AuthScreenEnums.TYPE)
+      .then(({type}) => {
+        if (type) {
+          setType(type);
+        }
+      })
+      .catch(err => console.log('TypeScree>>', err));
+  }, []);
+
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <CustomHeader

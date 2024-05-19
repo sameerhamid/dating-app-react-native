@@ -15,9 +15,10 @@ import {Images} from '../../../common/constants/images';
 import {goBack, navigate} from '../../../common/utils/navigatorUtils';
 import Colors from '../../../common/styles/colors';
 import {NavScreenTags} from '../../../common/constants/navScreenTags';
-import {ParamListBase, RouteProp, useRoute} from '@react-navigation/native';
+import {useRoute} from '@react-navigation/native';
 import {promptsType} from '../ShowPromptsScreen/promptsData';
 import {saveRegistrationProgress} from '../../../common/utils/registrationUtils';
+import {AuthScreenEnums} from '../../../common/constants/enums';
 
 const PromptsScreen = () => {
   const route = useRoute();
@@ -26,7 +27,10 @@ const PromptsScreen = () => {
     //@ts-ignore
     if (route.params?.prompts.length > 0) {
       //@ts-ignore
-      saveRegistrationProgress('Prompts', route.params?.prompts.length);
+      saveRegistrationProgress(AuthScreenEnums.PROMPTS, {
+        //@ts-ignore
+        prompts: route.params?.prompts,
+      });
     }
 
     navigate(NavScreenTags.PREFINAL_SCREEN);
@@ -200,7 +204,7 @@ const styles = StyleSheet.create({
   },
   input: {
     marginTop: scaleSize(20),
-
+    color: 'black',
     borderBottomWidth: scaleSize(1),
     paddingHorizontal: scaleSize(6),
     paddingVertical: scaleSize(12),

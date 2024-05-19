@@ -6,6 +6,7 @@ import {
   getRegistrationProgress,
   saveRegistrationProgress,
 } from '../../../common/utils/registrationUtils';
+import {AuthScreenEnums} from '../../../common/constants/enums';
 
 interface usePhoteSceenControllerTypes {
   imageUrls: string[];
@@ -53,17 +54,17 @@ const usePhotoScreenController = (): usePhoteSceenControllerTypes => {
 
   const handleNext = (): void => {
     if (imageUrls.length > 0) {
-      saveRegistrationProgress('Photos', imageUrls);
+      saveRegistrationProgress(AuthScreenEnums.PHOTOS, {imageUrls});
     }
     navigate(NavScreenTags.PROMPTS_SCREEN);
   };
 
   useEffect(() => {
-    getRegistrationProgress('Photos').then(photos => {
-      console.log(photos);
+    getRegistrationProgress(AuthScreenEnums.PHOTOS).then(imageUrls => {
+      console.log(imageUrls);
 
-      if (photos) {
-        setImageUrl(photos);
+      if (imageUrls) {
+        setImageUrl(imageUrls);
       }
     });
   }, []);

@@ -10,12 +10,13 @@ import CustomText from '../../../common/components/customText';
 import {NavScreenTags} from '../../../common/constants/navScreenTags';
 import Colors from '../../../common/styles/colors';
 import {saveRegistrationProgress} from '../../../common/utils/registrationUtils';
+import {AuthScreenEnums} from '../../../common/constants/enums';
 const PasswordScreen = () => {
   const [password, setPassword] = useState<string>('');
 
   const handleNext = (): void => {
     if (password.trim() !== '') {
-      saveRegistrationProgress('Passoword', password);
+      saveRegistrationProgress(AuthScreenEnums.PASSWORD, {password});
       navigate(NavScreenTags.BIRTH_SCREEN);
     }
   };
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
   },
   input: {
     marginTop: scaleSize(20),
-
+    color: 'black',
     borderBottomWidth: scaleSize(1),
     paddingHorizontal: scaleSize(6),
     paddingVertical: scaleSize(12),

@@ -48,6 +48,7 @@ const ShowPrompts = () => {
       navigate(NavScreenTags.PROMPTS_SCREEN, {prompts: prompts});
     }
   }, [prompts]);
+
   const addPrompt = () => {
     if (answer !== '') {
       const newPromt = {question, answer};
@@ -232,7 +233,7 @@ const styles = StyleSheet.create({
     marginTop: scaleSize(16),
     borderWidth: scaleSize(1),
     paddingHorizontal: scaleSize(16),
-
+    color: 'black',
     fontSize: scaleFontSize(18),
     borderStyle: 'dashed',
     height: scaleSize(80),

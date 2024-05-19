@@ -58,3 +58,20 @@ export enum ShowPromptsEnum {
   ABOUT_ME = 'About me',
   SELF_CARE = 'Self Care',
 }
+
+// auth screen enums
+
+export enum AuthScreenEnums {
+  NAME = 'Name',
+  EMAIL = 'Email',
+  PASSWORD = 'Password',
+  BIRTH = 'Birth',
+  LOCATION = 'Location',
+  GENDER = 'Gender',
+  TYPE = 'Type',
+  DATING = 'Dating',
+  LOOKING_FOR = 'LookingFor',
+  HOME_TOWN = 'HomeTown',
+  PHOTOS = 'Photos',
+  PROMPTS = 'Prompts',
+}

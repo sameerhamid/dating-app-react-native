@@ -14,7 +14,7 @@ import {Images} from '../../../common/constants/images';
 import {goBack, navigate} from '../../../common/utils/navigatorUtils';
 import Colors from '../../../common/styles/colors';
 import {NavScreenTags} from '../../../common/constants/navScreenTags';
-import {Gender} from '../../../common/constants/enums';
+import {AuthScreenEnums, Gender} from '../../../common/constants/enums';
 import {
   getRegistrationProgress,
   saveRegistrationProgress,
@@ -24,13 +24,13 @@ const GenderScreen = () => {
 
   const handleNext = (): void => {
     if (gender.trim() !== '') {
-      saveRegistrationProgress('Gender', gender);
+      saveRegistrationProgress(AuthScreenEnums.GENDER, {gender});
       navigate(NavScreenTags.TYPE_SCREEN);
     }
   };
 
   useEffect(() => {
-    getRegistrationProgress('Gender').then(gender => {
+    getRegistrationProgress(AuthScreenEnums.GENDER).then(({gender}) => {
       setGender(gender);
     });
   }, []);

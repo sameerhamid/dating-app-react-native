@@ -14,7 +14,11 @@ import {Images} from '../../../common/constants/images';
 import {goBack, navigate} from '../../../common/utils/navigatorUtils';
 import Colors from '../../../common/styles/colors';
 import {NavScreenTags} from '../../../common/constants/navScreenTags';
-import {DatingType, LookingFor} from '../../../common/constants/enums';
+import {
+  AuthScreenEnums,
+  DatingType,
+  LookingFor,
+} from '../../../common/constants/enums';
 import {
   getRegistrationProgress,
   saveRegistrationProgress,
@@ -24,14 +28,14 @@ const LookingForScreen = () => {
 
   const handleNext = (): void => {
     if (looingfor.trim() !== '') {
-      saveRegistrationProgress('LookingFor', looingfor);
+      saveRegistrationProgress(AuthScreenEnums.LOOKING_FOR, {looingfor});
       navigate(NavScreenTags.HOME_TOWN_SCREEN);
     }
   };
 
   useEffect(() => {
-    getRegistrationProgress('LookingFor').then(looking => {
-      setLookingfor(looking);
+    getRegistrationProgress(AuthScreenEnums.LOOKING_FOR).then(({looingfor}) => {
+      setLookingfor(looingfor);
     });
   }, []);
 

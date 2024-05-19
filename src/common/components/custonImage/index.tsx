@@ -16,6 +16,8 @@ const defauleProps: Props = {
   sourceType: undefined,
 };
 const CustomImage = (props: typeof defauleProps): React.ReactElement => {
+  console.log(source);
+
   const {source, tintColor, imageStyle, sourceType} = props;
 
   const imageStyled = imageStyles();

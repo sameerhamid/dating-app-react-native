@@ -18,23 +18,25 @@ import {
   getRegistrationProgress,
   saveRegistrationProgress,
 } from '../../../common/utils/registrationUtils';
+import {AuthScreenEnums} from '../../../common/constants/enums';
+
 const NameScreen = () => {
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
 
   useEffect(() => {
-    getRegistrationProgress('Name').then(progressData => {
+    getRegistrationProgress(AuthScreenEnums.NAME).then(progressData => {
       if (progressData) {
         console.log(JSON.stringify(progressData));
 
-        setFirstName(progressData || '');
+        setFirstName(progressData.firstName || '');
       }
     });
   }, []);
 
   const handleNext = (): void => {
     if (firstName.trim() !== '') {
-      saveRegistrationProgress('Name', firstName);
+      saveRegistrationProgress(AuthScreenEnums.NAME, {firstName});
 
       navigate(NavScreenTags.EMAIL_SCREEN);
     }
@@ -149,7 +151,7 @@ const styles = StyleSheet.create({
   },
   input: {
     marginTop: scaleSize(20),
-
+    color: 'black',
     borderBottomWidth: scaleSize(1),
     paddingHorizontal: scaleSize(6),
     paddingVertical: scaleSize(12),

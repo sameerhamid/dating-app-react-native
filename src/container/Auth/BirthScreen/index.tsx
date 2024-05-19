@@ -13,6 +13,7 @@ import {
   getRegistrationProgress,
   saveRegistrationProgress,
 } from '../../../common/utils/registrationUtils';
+import {AuthScreenEnums} from '../../../common/constants/enums';
 const BirthScreen = () => {
   const monthRef = useRef(null);
   const yearRef = useRef(null);
@@ -40,16 +41,16 @@ const BirthScreen = () => {
   const handleNext = (): void => {
     if (day.trim() !== '' && month.trim() !== '' && year.trim() !== '') {
       const dateOfBirth = `${day}/${month}/${year}`;
-      saveRegistrationProgress('BirthDate', dateOfBirth);
+      saveRegistrationProgress(AuthScreenEnums.BIRTH, {dateOfBirth});
       navigate(NavScreenTags.LOCATION_SCREEN);
     }
   };
 
   useEffect(() => {
-    getRegistrationProgress('BirthDate')
-      .then(birth => {
-        if (birth) {
-          const dataOfBirth = birth.split('/');
+    getRegistrationProgress(AuthScreenEnums.BIRTH)
+      .then(progressData => {
+        if (progressData.dateOfBirth) {
+          const dataOfBirth = progressData.dateOfBirth.split('/');
           setDay(dataOfBirth[0]);
           setMonth(dataOfBirth[1]);
           setYear(dataOfBirth[2]);
@@ -178,7 +179,7 @@ const styles = StyleSheet.create({
   },
   input: {
     marginTop: scaleSize(20),
-
+    color: 'black',
     borderBottomWidth: scaleSize(1),
     paddingHorizontal: scaleSize(10),
     paddingVertical: scaleSize(12),
