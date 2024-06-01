@@ -7,14 +7,20 @@ import {
   useState,
 } from 'react';
 
-// export interface AuthContextTypes {
-//   token?: string;
-//   setToken?: Dispatch<SetStateAction<string>>;
-//   isLoading?: boolean;
-//   setIsloading?: Dispatch<SetStateAction<boolean>>;
-// }
+export interface AuthContextTypes {
+  Provider: any;
+  token?: string;
+  setToken?: Dispatch<SetStateAction<string>>;
+  isLoading?: boolean;
+  setIsloading?: Dispatch<SetStateAction<boolean>>;
+}
 
-const AuthContext = createContext(null);
+const AuthContext: AuthContextTypes = createContext({
+  token: '',
+  setToken: () => {},
+  isLoading: false,
+  setIsLoading: () => {},
+});
 
 const AuthProvider = ({children}: any) => {
   const [token, setToken] = useState<string>('');
