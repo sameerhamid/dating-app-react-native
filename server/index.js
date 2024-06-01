@@ -2,9 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const crypto = require('crypto');
-
+require('dotenv').config();
 const app = express();
-const port = 6000;
+const port = process.env.PORT || 5000;
 const cors = require('cors');
 
 const http = require('http').createServer(app);
@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 
 mongoose
-  .connect('mongodb+srv://codewithsamiir:sameer@cluster0.hpeechq.mongodb.net/')
+  .connect(process.env.MONGO_DB_URL)
   .then(() => {
     console.log('Connected to monogdb');
   })
@@ -33,11 +33,13 @@ const User = require('./models/user.model.js');
 
 app.post('/register', async (req, res) => {
   try {
-    const userData = req.body;
-    const newUser = new User(userData);
-    await newUser.save();
-    const secretKey = crypto.randomBytes(32).toString('hex');
-    const token = jwt.sing({userId: newUser._id, secretKey});
+    console.log('request data>>>', req.query);
+    const userData = req.body; // gets details from the request
+    const newUser = new User(userData); // creates user instance
+    await newUser.save(); // save th user into mongodb
+    const secretKey = process.env.SECRET_KEY;
+    console.log('secret key>>>', secretKey);
+    const token = jwt.sign({userId: newUser._id}, secretKey);
     res.status(200).json({token});
   } catch (error) {
     console.log(`Error creating user >>> ${error}`);

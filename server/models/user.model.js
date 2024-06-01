@@ -57,11 +57,11 @@ const userSchema = new Schema(
       {
         question: {
           type: String,
-          required: true,
+          // required: true,
         },
         answer: {
           type: String,
-          required: true,
+          // required: true,
         },
       },
     ],
@@ -76,11 +76,11 @@ const userSchema = new Schema(
         userId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'User',
-          required: true,
+          // required: true,
         },
         image: {
           type: String,
-          required: true,
+          // required: true,
         },
         comment: {
           type: String,
@@ -103,6 +103,6 @@ const userSchema = new Schema(
   {timestamps: true},
 );
 
-const User = mongoose.Model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;
