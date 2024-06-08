@@ -10,6 +10,9 @@ import {AuthScreenEnums} from '../../../common/constants/enums';
 import {getRegistrationProgress} from '../../../common/utils/registrationUtils';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axiosInstance from '../../../common/utils/networkUtils';
+import LocalStorageUtils from '../../../common/utils/localStorageUtils';
+import {LocalStorageKeys} from '../../../common/utils/localStorageKeys';
 
 interface UserData {
   Name?: string;
@@ -68,26 +71,22 @@ const usePrefinalScreenController = (): PrefinalScreenControllerType => {
     }
   };
 
-  console.log(userData);
+  console.log('userData', JSON.stringify(userData));
 
   const regisetrUser = async (): Promise<void> => {
-    try {
-      const response = await axios.post(
-        'http://localhost:6000/register',
-        userData,
-      );
+    console.log('useEffect---');
 
-      console.log(JSON.stringify(response));
-
-      // .then(resp => {
-      //   console.log(JSON.stringify(resp));
-      //   const token = resp.data?.token;
-      //   AsyncStorage.setItem('token', token);
-      //   setToken(token);
-      // });
-    } catch (error) {
-      console.log(`Error While registering the user>>> ${error}`);
-    }
+    axios
+      .post('http://127.0.0.1:3000/register', userData)
+      .then(async res => {
+        console.log('response>>>', JSON.stringify(res));
+        const token = res.data.token;
+        await LocalStorageUtils.setItem(LocalStorageKeys.TOKEN, token);
+        setToken(token);
+      })
+      .catch(err => {
+        console.log('error>>>', err);
+      });
   };
 
   // ========== Effects ===========

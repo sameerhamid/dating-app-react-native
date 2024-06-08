@@ -19,6 +19,7 @@ import {
   saveRegistrationProgress,
 } from '../../../common/utils/registrationUtils';
 import {AuthScreenEnums} from '../../../common/constants/enums';
+import axios from 'axios';
 
 const NameScreen = () => {
   const [firstName, setFirstName] = useState<string>('');
