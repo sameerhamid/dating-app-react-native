@@ -1,5 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// import {StorageKeysTags} from '../constants/storageKeysTags';
+
 export default class LocalStorageUtils {
   /**
    * set Item In Local Storage
@@ -8,7 +10,10 @@ export default class LocalStorageUtils {
    * @returns
    */
   static setItem(key: string, value: Object): Promise<void> {
-    return AsyncStorage.setItem(key, JSON.stringify(value));
+    return AsyncStorage.setItem(
+      key,
+      typeof value === 'string' ? value : JSON.stringify(value),
+    );
   }
 
   /**
@@ -16,7 +21,7 @@ export default class LocalStorageUtils {
    * @param key string
    * @returns
    */
-  static getItem(key: string): Promise<object> {
+  static getItem(key: string): Promise<void> {
     return AsyncStorage.getItem(key).then(item => {
       if (item === undefined || item === '' || item === null) {
         return undefined;

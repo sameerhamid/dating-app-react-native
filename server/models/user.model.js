@@ -37,7 +37,7 @@ const userSchema = new Schema(
     },
     hometown: {
       type: String,
-      required: true,
+      // required: true,
     },
     datingPrefrence: [
       {
@@ -46,7 +46,7 @@ const userSchema = new Schema(
     ],
     lookingFor: {
       type: String,
-      required: true,
+      // required: true,
     },
     imageUrls: [
       {
@@ -57,11 +57,11 @@ const userSchema = new Schema(
       {
         question: {
           type: String,
-          // required: true,
+          required: true,
         },
         answer: {
           type: String,
-          // required: true,
+          required: true,
         },
       },
     ],
@@ -76,11 +76,11 @@ const userSchema = new Schema(
         userId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'User',
-          // required: true,
+          required: true,
         },
         image: {
           type: String,
-          // required: true,
+          required: true,
         },
         comment: {
           type: String,

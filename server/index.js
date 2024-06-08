@@ -4,14 +4,14 @@ const mongoose = require('mongoose');
 const crypto = require('crypto');
 require('dotenv').config();
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 const cors = require('cors');
 
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const jwt = require('jsonwebtoken');
 
-app.use(cors());
+app.use(cors('*'));
 app.use(bodyParser({extended: false}));
 app.use(bodyParser.json());
 app.use(express.json());
@@ -25,7 +25,7 @@ mongoose
     console.log(`MongoDB connection error>>> ${err}`);
   });
 
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`Server running on port>>> ${port}`);
 });
 
