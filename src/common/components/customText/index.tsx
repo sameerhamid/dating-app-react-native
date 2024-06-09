@@ -24,7 +24,7 @@ const defaultProps: Props = {
 
 const CustomText = (props: typeof defaultProps): React.ReactElement | null => {
   const theme: ThemeModelItem = useTheme();
-  const styles = textStyles(theme.colors);
+  const textstyle = textStyles(theme.colors);
   const {text, txtStyle, txtSize, numberOfLines, onTextPress} = props;
   if (text) {
     return (
@@ -32,7 +32,7 @@ const CustomText = (props: typeof defaultProps): React.ReactElement | null => {
         onPress={onTextPress}
         numberOfLines={numberOfLines ?? 0}
         style={[
-          styles.bold16,
+          textstyle.black16,
           txtStyle ?? {},
           txtSize ? {fontSize: txtSize} : {},
         ]}>

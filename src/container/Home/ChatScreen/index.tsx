@@ -1,10 +1,11 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import CustomText from '../../../common/components/customText';
 
 const ChatScreen = () => {
   return (
     <View>
-      <Text>ChatScreen</Text>
+      <CustomText text="ChatScreen" />
     </View>
   );
 };

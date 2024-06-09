@@ -1,10 +1,11 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import CustomText from '../../../common/components/customText';
 
 const LikesScreen = () => {
   return (
     <View>
-      <Text>LikesScreen</Text>
+      <CustomText text="LikesScreen" />
     </View>
   );
 };

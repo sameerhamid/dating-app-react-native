@@ -1,10 +1,11 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import CustomText from '../../../common/components/customText';
 
 const ProfileScreen = () => {
   return (
     <View>
-      <Text>index</Text>
+      <CustomText text="ProfileScreen" />
     </View>
   );
 };
