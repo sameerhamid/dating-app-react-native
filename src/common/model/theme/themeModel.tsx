@@ -10,6 +10,7 @@ export class Colors {
   border: string;
 
   notification: string;
+  white?: string;
 
   constructor(
     primary: string,

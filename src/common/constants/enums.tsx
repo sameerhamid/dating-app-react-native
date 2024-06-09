@@ -75,3 +75,9 @@ export enum AuthScreenEnums {
   PHOTOS = 'Photos',
   PROMPTS = 'Prompts',
 }
+
+export enum HomeScreenTopTab {
+  COMPATIBLE = 'Compatible',
+  ACTIVE_TODAY = 'Active Today',
+  NEW_HERE = 'New Here',
+}

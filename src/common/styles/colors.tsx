@@ -10,5 +10,6 @@ export const Colors = {
   notification: 'rgb(255, 59, 48)',
   purpleButtonTheme: 'red',
   grey100: '#ccc',
+  white: 'white',
 };
 export default Colors;

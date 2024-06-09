@@ -1,7 +1,13 @@
 import {jwtDecode} from 'jwt-decode';
-import {useContext, useEffect, useState} from 'react';
+import {Dispatch, SetStateAction, useContext, useEffect, useState} from 'react';
 import {Get} from '../../../common/services/httpRequrest';
 import {AuthContext} from '../../Auth/AuthContext';
+import {HomeScreenTopTab} from '../../../common/constants/enums';
+import {ThemeModelItem} from '../../../common/model/theme/themeModel';
+import textStyles, {
+  TextStyleTypes,
+} from '../../../common/components/customText/textStyles';
+import {useTheme} from '@react-navigation/native';
 
 export interface JwtDecodeType {
   iat?: string;
@@ -26,10 +32,17 @@ export interface ProfileDataType {
   type?: string;
   updatedAt?: string;
 }
-
+interface TabTypes {
+  id: number;
+  name: string;
+}
 interface HomeScreenControllerTypes {
   profileData: ProfileDataType[];
   currentProfile: ProfileDataType;
+  tabs: TabTypes[];
+  textStyle: TextStyleTypes;
+  selectedTab: number;
+  setSelectedTab: Dispatch<SetStateAction<number>>;
 }
 
 const useHomeScreenController = (): HomeScreenControllerTypes => {
@@ -39,6 +52,15 @@ const useHomeScreenController = (): HomeScreenControllerTypes => {
   const [currentProfile, setCurrentProfile] = useState<ProfileDataType>(
     profileData[0],
   );
+  const tabs: TabTypes[] = [
+    {id: 1, name: HomeScreenTopTab.COMPATIBLE},
+    {id: 2, name: HomeScreenTopTab.ACTIVE_TODAY},
+    {id: 3, name: HomeScreenTopTab.NEW_HERE},
+  ];
+
+  const theme: ThemeModelItem = useTheme();
+  const textStyle = textStyles(theme.colors);
+  const [selectedTab, setSelectedTab] = useState(1);
   //@ts-ignore
   const {token} = useContext(AuthContext);
   const fetchUser = (): void => {
@@ -78,7 +100,14 @@ const useHomeScreenController = (): HomeScreenControllerTypes => {
     }
   }, [profileData]);
 
-  return {profileData, currentProfile};
+  return {
+    profileData,
+    currentProfile,
+    tabs,
+    textStyle,
+    selectedTab,
+    setSelectedTab,
+  };
 };
 
 export default useHomeScreenController;
