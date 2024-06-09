@@ -1,7 +1,7 @@
 import {StyleSheet, TextStyle} from 'react-native';
 import {scaleFontSize, scaleSize} from '../../utils/scaleSheetUtils';
 import {FontFamily} from '../../styles/fonts';
-import {Colors} from '../../theme/themeModel';
+import {Colors} from '../../themes/themeModel';
 import {isIOS} from '../../constants/platformInfo';
 
 export type TextStyles = {

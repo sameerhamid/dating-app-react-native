@@ -1,6 +1,6 @@
 import {StyleSheet, ViewStyle} from 'react-native';
 import {scaleSize} from '../../utils/scaleSheetUtils';
-import {Colors} from '../../theme/themeModel';
+import {Colors} from '../../themes/themeModel';
 
 type Styles = {
   btnView: ViewStyle;

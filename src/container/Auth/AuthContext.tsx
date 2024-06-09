@@ -6,6 +6,8 @@ import {
   useEffect,
   useState,
 } from 'react';
+import LocalStorageUtils from '../../common/utils/localStorageUtils';
+import {LocalStorageKeys} from '../../common/utils/localStorageKeys';
 
 export interface AuthContextTypes {
   Provider: any;
@@ -23,13 +25,14 @@ const AuthContext: AuthContextTypes = createContext({
 });
 
 const AuthProvider = ({children}: any) => {
-  const [token, setToken] = useState<string>('');
-  const [isLoading, setIsloading] = useState<boolean>(false);
-
+  const [token, setToken] = useState<AuthContextTypes['token']>('');
+  const [isLoading, setIsloading] =
+    useState<AuthContextTypes['isLoading']>(false);
   const isLoggedIn = async () => {
     try {
       setIsloading(true);
-      const userToken = await AsyncStorage.getItem('Token');
+      const userToken = await LocalStorageUtils.getItem(LocalStorageKeys.TOKEN);
+      //@ts-ignore
       setToken(userToken ?? '');
       setIsloading(false);
     } catch (error) {
