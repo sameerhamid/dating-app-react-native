@@ -46,7 +46,7 @@ const userSchema = new Schema(
     ],
     lookingFor: {
       type: String,
-      // required: true,
+      required: true,
     },
     imageUrls: [
       {
