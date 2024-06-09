@@ -13,4 +13,6 @@ public final class BuildConfig {
   public static final boolean IS_HERMES_ENABLED = true;
   // Field from default config.
   public static final boolean IS_NEW_ARCHITECTURE_ENABLED = false;
+  // Field from default config.
+  public static final String baseUrl = "http://127.0.0.1:3000";
 }

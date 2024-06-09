@@ -3302,6 +3302,7 @@ string alert_description
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior
+string baseUrl
 string bottom_sheet_behavior
 string bottomsheet_action_expand_halfway
 string catalyst_change_bundle_location

@@ -19,6 +19,8 @@ import com.reactnativecommunity.geolocation.GeolocationPackage;
 import org.reactnative.maskedview.RNCMaskedViewPackage;
 // lottie-react-native
 import com.airbnb.android.react.lottie.LottiePackage;
+// react-native-config
+import com.lugg.RNCConfig.RNCConfigPackage;
 // react-native-device-info
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 // react-native-gesture-handler
@@ -80,6 +82,7 @@ public class PackageList {
       new GeolocationPackage(),
       new RNCMaskedViewPackage(),
       new LottiePackage(),
+      new RNCConfigPackage(),
       new RNDeviceInfo(),
       new RNGestureHandlerPackage(),
       new MapsPackage(),
