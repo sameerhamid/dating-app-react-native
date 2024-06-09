@@ -55,7 +55,7 @@ Start the backend server
 
 ## Step 2.3: go to root dir
 
-reverse adb server set same as port number used for backen server
+reverse adb server set same as port number used for backend server
 
 # adb reverse tcp:3000 tcp:3000
 
