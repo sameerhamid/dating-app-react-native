@@ -5,7 +5,7 @@ import {
   TextStyle,
   ViewStyle,
 } from 'react-native';
-import {Colors} from '../../theme/themeModel';
+import {Colors} from '../../themes/themeModel';
 import {scaleFontSize, scaleSize} from '../../utils/scaleSheetUtils';
 import {FontFamily} from '../../styles/fonts';
 

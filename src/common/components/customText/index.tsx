@@ -4,7 +4,7 @@ import React from 'react';
 import {useTheme} from '@react-navigation/native';
 
 import textStyles from './textStyles';
-import {ThemeModelItem} from '../../theme/themeModel';
+import {ThemeModelItem} from '../../themes/themeModel';
 
 interface Props {
   text?: string;

@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {createStackNavigator} from '@react-navigation/stack';
@@ -26,6 +26,8 @@ import PromptsScreen from '../../container/Auth/PromptsScreen';
 import ShowPromptsScreen from '../../container/Auth/ShowPromptsScreen';
 import PrefinalScreen from '../../container/Auth/PreFinalScreen';
 import {navigationRef} from '../utils/navigatorUtils';
+import {AuthContext} from '../../container/Auth/AuthContext';
+import {DarkTheme} from '../themes/DarkTheme';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -51,21 +53,7 @@ const BottomTabs = () => {
             ),
         }}
       />
-      <Tab.Screen
-        name={NavScreenTags.CHAT_TAB}
-        component={ChatScreen}
-        options={{
-          // tabBarStyle: {backgroundColor: '#ccc'},
-          // tabBarLabelStyle: {color: '#008397'},
-          headerShown: false,
-          tabBarIcon: ({focused}) =>
-            focused ? (
-              <Ionicons name="chatbox-sharp" size={30} color={'#1593a1'} />
-            ) : (
-              <Ionicons name="chatbox-outline" size={30} color={'#1593a1'} />
-            ),
-        }}
-      />
+
       <Tab.Screen
         name={NavScreenTags.LIKE_TAB}
         component={LikesScreen}
@@ -78,6 +66,21 @@ const BottomTabs = () => {
               <Ionicons name="heart-sharp" size={30} color={'#1593a1'} />
             ) : (
               <Ionicons name="heart-outline" size={30} color={'#1593a1'} />
+            ),
+        }}
+      />
+      <Tab.Screen
+        name={NavScreenTags.CHAT_TAB}
+        component={ChatScreen}
+        options={{
+          // tabBarStyle: {backgroundColor: '#ccc'},
+          // tabBarLabelStyle: {color: '#008397'},
+          headerShown: false,
+          tabBarIcon: ({focused}) =>
+            focused ? (
+              <Ionicons name="chatbox-sharp" size={30} color={'#1593a1'} />
+            ) : (
+              <Ionicons name="chatbox-outline" size={30} color={'#1593a1'} />
             ),
         }}
       />
@@ -197,11 +200,12 @@ const MainStack = () => {
   );
 };
 const StackNavigation = () => {
-  return (
-    <NavigationContainer ref={navigationRef}>
-      {/* <MainStack /> */}
+  //@ts-ignore
+  const {token} = useContext(AuthContext);
 
-      <AuthStack />
+  return (
+    <NavigationContainer ref={navigationRef} theme={DarkTheme}>
+      {token === '' ? <AuthStack /> : <MainStack />}
     </NavigationContainer>
   );
 };

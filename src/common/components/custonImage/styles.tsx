@@ -1,6 +1,6 @@
 import {ImageStyle, StyleSheet} from 'react-native';
 import {scaleSize, scaleSizeWidth} from '../../utils/scaleSheetUtils';
-import {Colors} from '../../theme/themeModel';
+import {Colors} from '../../themes/themeModel';
 export type ImageStyles = {
   icon_13: ImageStyle;
   icon_20: ImageStyle;

@@ -1,31 +1,27 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
-import {AuthContext, AuthContextTypes} from '../AuthContext';
+import {Dispatch, SetStateAction, useContext, useEffect, useState} from 'react';
+
 import {AuthScreenEnums} from '../../../common/constants/enums';
 import {getRegistrationProgress} from '../../../common/utils/registrationUtils';
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import axiosInstance from '../../../common/utils/networkUtils';
 import LocalStorageUtils from '../../../common/utils/localStorageUtils';
 import {LocalStorageKeys} from '../../../common/utils/localStorageKeys';
+import {Alert} from 'react-native';
+import {AuthContext, AuthContextTypes} from '../AuthContext';
+import {replace} from '../../../common/utils/navigatorUtils';
+import {NavScreenTags} from '../../../common/constants/navScreenTags';
 
 interface UserData {
-  Name?: string;
-  Email?: string;
-  Password?: string;
-  Birth?: string;
+  firstName?: string;
+  email?: string;
+  password?: string;
+  dateOfBirth?: string;
   Location?: string;
-  Gender?: string;
-  Type?: string;
-  Dating?: string;
-  LookinFor?: string;
-  HomeTown?: string;
-  Photos?: string;
+  gender?: string;
+  type?: string;
+  datingPreferences?: string;
+  looingfor?: string;
+  home?: string;
+  imageUrls?: string;
   Prompts?: string;
 }
 interface PrefinalScreenControllerType {
@@ -36,9 +32,8 @@ interface PrefinalScreenControllerType {
 }
 const usePrefinalScreenController = (): PrefinalScreenControllerType => {
   const [userData, setUserData] = useState<UserData>();
-
   //@ts-ignore
-  const {token, setToken} = useContext<string>(AuthContext);
+  const {token, setToken} = useContext<AuthContextTypes>(AuthContext);
 
   const getAllUserData = async () => {
     try {
@@ -71,22 +66,25 @@ const usePrefinalScreenController = (): PrefinalScreenControllerType => {
     }
   };
 
-  console.log('userData', JSON.stringify(userData));
-
   const regisetrUser = async (): Promise<void> => {
-    console.log('useEffect---');
-
-    axios
-      .post('http://127.0.0.1:3000/register', userData)
-      .then(async res => {
-        console.log('response>>>', JSON.stringify(res));
-        const token = res.data.token;
-        await LocalStorageUtils.setItem(LocalStorageKeys.TOKEN, token);
-        setToken(token);
-      })
-      .catch(err => {
-        console.log('error>>>', err);
-      });
+    if (userData?.email !== undefined) {
+      console.log('inside if---');
+      axios
+        .post('http://127.0.0.1:3000/register', userData)
+        .then(async res => {
+          const token = res.data.token;
+          await LocalStorageUtils.removeAll();
+          await LocalStorageUtils.setItem(LocalStorageKeys.TOKEN, token);
+          //@ts-ignore
+          setToken(token);
+          replace(NavScreenTags.BOTTOM_TAB_NAV);
+        })
+        .catch(err => {
+          console.log('error>>>', err);
+        });
+    } else {
+      Alert.alert('User details is empty');
+    }
   };
 
   // ========== Effects ===========
