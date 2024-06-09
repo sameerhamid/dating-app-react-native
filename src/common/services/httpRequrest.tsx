@@ -51,3 +51,26 @@ export const Post = async (
       errorCallback(err?.message);
     });
 };
+
+/**
+ * get method to fetch data from given url
+ * @param url
+ * @param successCallback
+ * @param errorCallback
+ */
+export const Get = async (
+  url: string,
+  successCallback: (_arg0: unknown) => void,
+  errorCallback: (_arg0: unknown) => void,
+): Promise<void> => {
+  api
+    .get(url)
+    .then(response => {
+      console.log(response.data);
+      successCallback(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+      errorCallback(error);
+    });
+};

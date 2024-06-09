@@ -14,21 +14,17 @@ import {Images} from '../../../common/constants/images';
 import {goBack, navigate} from '../../../common/utils/navigatorUtils';
 import Colors from '../../../common/styles/colors';
 import {NavScreenTags} from '../../../common/constants/navScreenTags';
-import {
-  AuthScreenEnums,
-  DatingType,
-  LookingFor,
-} from '../../../common/constants/enums';
+import {AuthScreenEnums, LookingFor} from '../../../common/constants/enums';
 import {
   getRegistrationProgress,
   saveRegistrationProgress,
 } from '../../../common/utils/registrationUtils';
 const LookingForScreen = () => {
-  const [looingfor, setLookingfor] = useState<string>('');
+  const [lookingFor, setLookingfor] = useState<string>('');
 
   const handleNext = (): void => {
-    if (looingfor.trim() !== '') {
-      saveRegistrationProgress(AuthScreenEnums.LOOKING_FOR, {looingfor});
+    if (lookingFor.trim() !== '') {
+      saveRegistrationProgress(AuthScreenEnums.LOOKING_FOR, {lookingFor});
       navigate(NavScreenTags.HOME_TOWN_SCREEN);
     }
   };
@@ -90,7 +86,7 @@ const LookingForScreen = () => {
                 name="circle"
                 size={scaleSize(26)}
                 color={
-                  looingfor === LookingFor.LIFEPARTNER
+                  lookingFor === LookingFor.LIFEPARTNER
                     ? Colors.purpleButtonTheme
                     : Colors.grey100
                 }
@@ -109,7 +105,7 @@ const LookingForScreen = () => {
                 name="circle"
                 size={scaleSize(26)}
                 color={
-                  looingfor === LookingFor.LONG_TERM_RELATIONSHIP
+                  lookingFor === LookingFor.LONG_TERM_RELATIONSHIP
                     ? Colors.purpleButtonTheme
                     : Colors.grey100
                 }
@@ -130,7 +126,7 @@ const LookingForScreen = () => {
                 name="circle"
                 size={scaleSize(26)}
                 color={
-                  looingfor === LookingFor.LONG_TERM_RELATIONSHIP_OPEN_TO_SHORT
+                  lookingFor === LookingFor.LONG_TERM_RELATIONSHIP_OPEN_TO_SHORT
                     ? Colors.purpleButtonTheme
                     : Colors.grey100
                 }
@@ -151,7 +147,7 @@ const LookingForScreen = () => {
                 name="circle"
                 size={scaleSize(26)}
                 color={
-                  looingfor === LookingFor.SHORT_TERM_RELATIONSHIP_OPEN_TO_LONG
+                  lookingFor === LookingFor.SHORT_TERM_RELATIONSHIP_OPEN_TO_LONG
                     ? Colors.purpleButtonTheme
                     : Colors.grey100
                 }
@@ -169,7 +165,7 @@ const LookingForScreen = () => {
                 name="circle"
                 size={scaleSize(26)}
                 color={
-                  looingfor === LookingFor.SHORT_TERM_RELATIONSHIP
+                  lookingFor === LookingFor.SHORT_TERM_RELATIONSHIP
                     ? Colors.purpleButtonTheme
                     : Colors.grey100
                 }
@@ -189,7 +185,7 @@ const LookingForScreen = () => {
                 name="circle"
                 size={scaleSize(26)}
                 color={
-                  looingfor === LookingFor.FIGURING_OUT_MY_DATING_GOALS
+                  lookingFor === LookingFor.FIGURING_OUT_MY_DATING_GOALS
                     ? Colors.purpleButtonTheme
                     : Colors.grey100
                 }

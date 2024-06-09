@@ -3,8 +3,7 @@ import React from 'react';
 import {scaleFontSize, scaleSize} from '../../../common/utils/scaleSheetUtils';
 import LottieView from 'lottie-react-native';
 import CustomButtom from '../../../common/components/customButton';
-import {navigate} from '../../../common/utils/navigatorUtils';
-import {NavScreenTags} from '../../../common/constants/navScreenTags';
+
 import CustomText from '../../../common/components/customText';
 import usePrefinalScreenController from './PrefinalScreenController';
 
